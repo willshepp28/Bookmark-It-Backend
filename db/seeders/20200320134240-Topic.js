@@ -36,6 +36,12 @@ module.exports = {
       photo_url: 'https://angular.io/assets/images/logos/angular/angular.png',
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      title: 'AWS S3',
+      photo_url: 'https://cdn2.iconfinder.com/data/icons/amazon-aws-stencils/100/Storage__Content_Delivery_Amazon_S3-512.png',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
     ])
   },

@@ -60,6 +60,14 @@ module.exports = {
       link_url: 'https://www.tutorialspoint.com/nodejs/nodejs_process.htm',
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      topic_id: 5,
+      subject: 'Using Amazon S3 to Host Streaming Videos',
+      description: 'Iam currently in the process of learning how to stream videos with aws s3, and thought that this would be useful',
+      link_url: 'https://www.tutorialspoint.com/nodejs/nodejs_process.htm',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
    ])
   },
