@@ -1,15 +1,15 @@
 const router = require("express").Router();
+const models = require("../db/models");
 
 
 
 
 
 router.get("/", (request, response) => {
-    return response.json({
-        id: 1, 
-        title: 'Sequelize'
+    models.Topic.findAll().then(topics => {
+        return response.json(topics);
     })
-})
+});
 
 
 
