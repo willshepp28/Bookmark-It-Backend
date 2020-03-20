@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Bookmark.associate = function(models) {
     // associations can be defined here
+    Bookmark.belongsTo(models.Topic);
   };
   return Bookmark;
 };

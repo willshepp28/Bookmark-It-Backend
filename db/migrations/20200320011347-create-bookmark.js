@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      topic_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Topics',
+          key: 'id'
+        }
+      },
       subject: {
         type: Sequelize.STRING
       },
