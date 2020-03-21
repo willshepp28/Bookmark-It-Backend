@@ -37,7 +37,7 @@ router.get("/getLatestBookmarks", (request, response) => {
 
 
 
-// Get bookmark by topic
+// Get bookmark by topic id
 router.get("/topic/:id", (request, response) => {
     models.Bookmark.findAll({
         order:[['createdAt', 'ASC']],
@@ -51,5 +51,10 @@ router.get("/topic/:id", (request, response) => {
 });
 
 
+
+// Add new bookmark by topic name
+router.post("/topic/:topicName", (request, response) => {
+
+})
 
 module.exports = router;

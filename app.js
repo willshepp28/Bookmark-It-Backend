@@ -3,11 +3,12 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const topicsAPI = require("./api/topics.api");
 const bookmarkAPI = require("./api/bookmarks.api");
+const cors = require("cors");
 
 
 application = express();
 
-
+application.use(cors());
 application.use(morgan("combined"));
 
 application.use(bodyParser.urlencoded());
