@@ -53,8 +53,20 @@ router.get("/topic/:id", (request, response) => {
 
 
 // Add new bookmark by topic name
-router.post("/topic/:topicName", (request, response) => {
+router.post("/addBookmarkByTopicName/:title", (request, response) => {
+    const body = request.body;
 
+    models.Topic.findOne({
+        attributes: ['id'],
+        where: {title: request.params.title}
+    }).then((topic) => {
+        body.topic_id = topic.id;
+        models.Bookmark.create(body).then(bookmark => {
+            return response.json(bookmark)
+        })
+    }).catch((error) => {
+        return response.json(error);
+    })
 })
 
 module.exports = router;
