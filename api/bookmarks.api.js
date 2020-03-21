@@ -11,6 +11,20 @@ router.get("/", (request, response) => {
 
 
 
+// Create a New Bookmark
+router.post('/createNewBookmark', (request, response) => {
+    const body = request.body;
+
+    models.Bookmark.create(body).then((user) => {
+        return response.json(user)
+    }).catch((error) => {
+        return response.json(error);
+    })
+});
+
+
+
+
 
 // Get latest bookmarks
 router.get("/getLatestBookmarks", (request, response) => {
