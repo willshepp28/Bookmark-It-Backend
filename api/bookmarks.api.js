@@ -3,13 +3,6 @@ const models = require("../db/models");
 
 
 
-router.get("/", (request, response) => {
-    models.Bookmark.findAll().then(bookmarks => {
-        return response.json(bookmarks);
-    });
-});
-
-
 
 // Create a New Bookmark
 router.post('/createNewBookmark', (request, response) => {
@@ -39,6 +32,22 @@ router.get("/getLatestBookmarks", (request, response) => {
     .catch(error => {
         return response.json(error);
     })
+});
+
+
+
+
+// Get bookmark by topic
+router.get("/topic/:id", (request, response) => {
+    models.Bookmark.findAll({
+        order:[['createdAt', 'ASC']],
+        where: { topic_id: request.params.id},
+        include: [{
+            model: models.Topic
+        }]
+    }).then(bookmarks => {
+        return response.json(bookmarks)
+    }).catch(error => response.json(eror))
 });
 
 
