@@ -12,12 +12,6 @@ router.get("/", (request, response) => {
 });
 
 
-router.get("/bookmarks", (request, response) => {
-    models.Bookmark.findAll().then(bookmarks => {
-        return response.json(bookmarks);
-    });
-});
-
 
 
 module.exports = router;

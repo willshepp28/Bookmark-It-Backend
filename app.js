@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const topicsAPI = require("./api/topics.api");
+const bookmarkAPI = require("./api/bookmarks.api");
 
 
 application = express();
@@ -18,6 +19,7 @@ application.get("/", (request, response) => {
 });
 
 application.use("/api/topics", topicsAPI);
+application.use("/api/bookmarks", bookmarkAPI);
 
 
 application.listen(3000, () => {
