@@ -9,6 +9,9 @@
   },
   "author": "Will Sheppard",
   "license": "ISC",
+  "engines": {
+    "node": "11.13.0"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "cors": "^2.8.5",
