@@ -17,7 +17,7 @@ application.use(bodyParser.json());
 
 
 application.get("/", (request, response) => {
-    return response.json("You are in the bookmark-it home path");
+    return response.json("Welcome to Bookmark It!!!");
 });
 
 application.use("/api/topics", topicsAPI);
