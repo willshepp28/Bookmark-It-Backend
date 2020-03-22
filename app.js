@@ -4,12 +4,14 @@ const morgan = require("morgan");
 const topicsAPI = require("./api/topics.api");
 const bookmarkAPI = require("./api/bookmarks.api");
 const PORT = process.env.PORT || 3000;
+const helmet = require("helmet");
 const cors = require("cors");
 
 
 application = express();
 
 application.use(cors());
+application.use(helmet());
 application.use(morgan("combined"));
 
 application.use(bodyParser.urlencoded());

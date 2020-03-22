@@ -112,4 +112,3 @@ router.post("/createBookmarkByTopic", (request, response) => {
 module.exports = router;
 
 
-// select * from "Bookmarks" inner join "Topics" on "Topics.id" = "Bookmarks.topic_id" where

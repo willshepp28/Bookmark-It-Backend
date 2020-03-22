@@ -4,8 +4,8 @@ const Joi = require('@hapi/joi');
 // create a function that validates user input when creating a new bookmark
 function validateBookmarkCreationInput(bookmarkInput) {
     const schema = Joi.object({
-        title: Joi.string().min(1).max(30).required(),
-        subject: Joi.string().min(1).max(30).required(),
+        title: Joi.string().min(1).required(),
+        subject: Joi.string().min(1).required(),
         description: Joi.string().min(1).required(),
         link_url: Joi.string().min(1).required()
     })
