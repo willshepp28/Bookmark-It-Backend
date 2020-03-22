@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       photo_url: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        defaultValue: "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png"
       },
       createdAt: {
         allowNull: false,

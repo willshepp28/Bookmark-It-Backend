@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const models = require("../db/models");
+const _ = require("lodash")
 
 
 
@@ -67,6 +68,40 @@ router.post("/addBookmarkByTopicName/:title", (request, response) => {
     }).catch((error) => {
         return response.json(error);
     })
-})
+});
+
+
+
+/**
+ *  Add a new bookmark using topic name
+ * 
+ *  CAVEAT: 
+ * - Using a topic name we should either find or create that topic,
+ * -  return the topic.id
+ * -  the create the bookmark using that topic.id 
+ * - wrap all of this in a transaction
+ */
+router.post("/createBookmarkByTopic", (request, response) => {
+    return models.sequelize.transaction(async(t) => {
+        return models.Topic.findOrCreate({
+            where: {title: request.body.title},
+            defaults: {
+                title: request.body.title,
+                link_ur: "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png"
+            },
+            transaction: t
+        })
+        .then((topic) => {
+            request.body.topic_id = topic[0].dataValues.id;
+            return models.Bookmark.create(_.omit(request.body, ['title']), { transaction: t})
+            .then((bookmark) => {
+                return response.status(200).json(bookmark);
+            })
+            .catch((error) => {
+                return response.json(error);
+            })
+        })
+    })
+});
 
 module.exports = router;
