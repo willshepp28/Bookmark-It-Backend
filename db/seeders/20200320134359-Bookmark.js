@@ -73,7 +73,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Bookmarks', null, {});
+    return queryInterface.bulkDelete('Bookmarks', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

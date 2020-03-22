@@ -82,6 +82,7 @@ router.post("/addBookmarkByTopicName/:title", (request, response) => {
  * - wrap all of this in a transaction
  */
 router.post("/createBookmarkByTopic", (request, response) => {
+    const bookmark = request.body;
     return models.sequelize.transaction(async(t) => {
         return models.Topic.findOrCreate({
             where: {title: request.body.title},
