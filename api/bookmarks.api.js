@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const models = require("../db/models");
 const _ = require("lodash")
-
+const validateBookmarkCreationInput = require("../helpers/validation/create-bookmark.validation");
 
 
 
@@ -82,21 +82,25 @@ router.post("/addBookmarkByTopicName/:title", (request, response) => {
  * - wrap all of this in a transaction
  */
 router.post("/createBookmarkByTopic", (request, response) => {
-    const bookmark = request.body;
+    const bookmark = validateBookmarkCreationInput(request.body);
+
+    if(bookmark.error) {
+        return response.status(400).json(bookmark.error.details.stack);
+    }
+
     return models.sequelize.transaction(async(t) => {
         return models.Topic.findOrCreate({
-            where: {title: request.body.title},
+            where: {title: bookmark.value.title},
             defaults: {
-                title: request.body.title,
-                link_ur: "https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png"
+                title: bookmark.value.title
             },
             transaction: t
         })
         .then((topic) => {
-            request.body.topic_id = topic[0].dataValues.id;
-            return models.Bookmark.create(_.omit(request.body, ['title']), { transaction: t})
-            .then((bookmark) => {
-                return response.status(200).json(bookmark);
+            bookmark.value.topic_id = topic[0].dataValues.id;
+            return models.Bookmark.create(_.omit(bookmark.value, ['title']), { transaction: t})
+            .then((data) => {
+                return response.status(200).json(data);
             })
             .catch((error) => {
                 return response.json(error);
@@ -106,3 +110,6 @@ router.post("/createBookmarkByTopic", (request, response) => {
 });
 
 module.exports = router;
+
+
+// select * from "Bookmarks" inner join "Topics" on "Topics.id" = "Bookmarks.topic_id" where
