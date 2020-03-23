@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const authenticationAPI = require("./api/authentication.api");
 const topicsAPI = require("./api/topics.api");
 const bookmarkAPI = require("./api/bookmarks.api");
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ application.get("/", (request, response) => {
     return response.json("Welcome to Bookmark It!!!");
 });
 
+application.use("/api/authentication", authenticationAPI);
 application.use("/api/topics", topicsAPI);
 application.use("/api/bookmarks", bookmarkAPI);
 
