@@ -38,6 +38,15 @@ router.get("/getLatestBookmarks", (request, response) => {
 
 
 
+
+
+// Get bookmark by topic title 
+router.get("/getBookmarksByTopicTitle", (request, response) => {
+    const topic = request.body;
+})
+
+
+
 // Get bookmark by topic id
 router.get("/topic/:id", (request, response) => {
     models.Bookmark.findAll({
