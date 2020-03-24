@@ -42,7 +42,18 @@ router.get("/getLatestBookmarks", (request, response) => {
 
 // Get bookmark by topic title 
 router.get("/getBookmarksByTopicTitle", (request, response) => {
-    const topic = request.body;
+    const topic_name = request.query.name;
+
+    models.Topic.findOne({
+        where: { title: topic_name},
+        include: [{
+            model: models.Bookmark
+        }]
+    }).then(topics => {
+        return response.status(200).json(topics)
+    }).catch(error => {
+        return response.json(error)
+    })
 })
 
 
