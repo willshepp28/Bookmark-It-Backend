@@ -50,9 +50,9 @@ router.get("/getBookmarksByTopicTitle", (request, response) => {
             model: models.Bookmark
         }]
     }).then(topics => {
-        return response.status(200).json(topics)
+        return response.status(200).json(topics);
     }).catch(error => {
-        return response.json(error)
+        return response.json(error);
     })
 })
 
